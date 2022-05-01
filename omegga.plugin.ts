@@ -82,10 +82,6 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
         Omegga.whisper(speaker,`Only the host or the person who started the votekick can /cancelvote.`);
         return {};
       }
-    })
-
-    Omegga.on('cmd:test', (speaker: string) => {
-      Omegga.broadcast(`Hello, ${speaker}!`);
     });
 
     return { registeredCommands: ['votekick','vk','cancelvote','vkyes','vkno'] };
@@ -113,8 +109,6 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     }
 
     //Check if the target has a valid name
-    var playerNames = [];
-    var playerNamesOrig = [];
     if (typeof targetName == "undefined") {
       Omegga.whisper(senderName,`Start a votekick by typing: /votekick [Name]`);
       return {};
@@ -179,7 +173,6 @@ export default class Plugin implements OmeggaPlugin<Config, Storage> {
     } else if (percentYes >= this.config["Percent Kick Threshold"]) {
       Omegga.broadcast(`<b>Votekick succeeds (<color="#047000">${this.votesYes}</> - <color="#b80f00">${this.votesNo}</>)</>`);
       if (this.config["Ban Length"]==0) {
-        Omegga.broadcast(`Chat.Command /kick \"${targetName}\" You have been votekicked off the server."`);
         Omegga.writeln(`Chat.Command /kick \"${targetName}\" You have been votekicked off the server."`);
       } else {
         Omegga.writeln(`Chat.Command /ban "${targetName}" ${this.config["Ban Length"]} "You have been votekicked off the server for ${this.config["Ban Length"]} minutes."`);
