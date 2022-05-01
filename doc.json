@@ -1,0 +1,100 @@
+{
+  "name": "VoteKick",
+  "description": "Put the moderation of your server in the hands of the unwashed masses. Allows people to start votekicks to remove problem users. Usage: /votekick [Name]",
+  "author": "SeventhSandwich",
+  "config": {
+  	"Vote Time": {
+  		"description": "How long before votes are tallied (seconds).",
+  		"default": 30,
+  		"type": "number"
+	   },
+     "Ban Length": {
+      "description": "Ban time for a votekicked user (minutes). Setting to 0 will only kick the user.",
+   		"default": 30,
+   		"type": "number"
+     },
+     "Exempt Roles": {
+      "description": "Roles that cannot be votekicked. Host is automatically exempt.",
+      "type": "list",
+      "itemType": "string",
+   		"default": ["Admin","Moderator"]
+     },
+     "Percent Kick Threshold": {
+       "description": "Percent of yes votes needed to kick.",
+       "default": 50,
+       "type": "number"
+     },
+     "Minimum Votes": {
+       "description": "Minimum total number of votes needed to kick.",
+       "default": 4,
+       "type": "number"
+     },
+     "Minimum Votes (Percent of Server Pop)": {
+       "description": "Minimum total number of votes needed to kick, as percentage of total server population.",
+       "default": 40,
+       "type": "number"
+     },
+     "Minimum Server Population": {
+       "description": "Minimum number of people needed on the server to allow votekicks.",
+       "default": 5,
+       "type": "number"
+     },
+     "Break Time": {
+   		"description": "How long after a vote before anyone can start a new one (seconds).",
+   		"default": 30,
+   		"type": "number"
+     },
+     "Break Time (per player)": {
+   		"description": "How long must the previous vote starter wait before starting a new vote (seconds). Recommended to be higher than Break Time.",
+   		"default": 120,
+   		"type": "number"
+     },
+     "Whitelist Mode": {
+       "description": "Only allow users on the whitelist to start votekicks.",
+       "type": "boolean",
+       "default": false
+     },
+     "Whitelisted Players": {
+       "description": "List of players who can use /votekick",
+       "type": "players",
+       "default": []
+     }
+  },
+  "commands": [
+    {
+      "name": "votekick",
+      "description": "Start a vote to kick a player",
+      "example": "/votekick Zeblote",
+      "args": [{
+        "name": "Name",
+        "description": "Player to be kicked",
+        "required": true
+      }]
+    },
+    {
+      "name": "vk",
+      "description": "Same function as /votekick",
+      "example": "/vk Zeblote",
+      "args": [{
+        "name": "Name",
+        "description": "Player to be kicked",
+        "required": true
+      }]
+    },
+    {
+      "name": "vkYes",
+      "description": "Vote yes on an active votekick",
+      "example": "/vkYes"
+    },
+    {
+      "name": "vkNo",
+      "description": "Vote no on an active votekick",
+      "example": "/vkNo"
+    },
+    {
+      "name": "cancelvote",
+      "description": "Cancel an active votekick, if you are the person who started it or the host.",
+      "example": "/cancelvote"
+    }
+  ]
+}
